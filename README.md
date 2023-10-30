@@ -1,8 +1,8 @@
 Hi I'm @RobsonOsuna
-- 👀 I'm interested in Programming and all IT areas
-- 🌱 I'm currently learning WEB Development at Udemy and studying Computer Engineering at UCDB
-- 📫 How to contact me "robsonosuna@hotmail.com"
-<!---
-RobsonOsuna/RobsonOsuna is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+
+Estudante de Engenharia de Computação na UCDB com formatura prevista para o final de 2023. 
+Possui amplo conhecimento em lógica de programação e experiência em linguagens como C/C++, 
+Python, JavaScript, SQL, HTML, CSS e PHP. Familiarizado com sistemas operacionais Windows 
+e Linux, bem como com o pacote Office. Apresenta facilidade para aprender e resolver problemas, 
+embora possua conhecimento básico em inglês. Preparado para enfrentar desafios na indústria
+de tecnologia com sua formação e habilidades em programação.
