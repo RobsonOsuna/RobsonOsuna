@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="Desafio" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+    
+    <title>Desafio</title>
+</head>
+<body>
+    <div class="centro">
+        <legend>Escolha seus interesses</legend>
+        <input type="radio" id="Filme" name="interesse" value="Filme">
+        <label for="coding"> Filme </label>
+        <input type="radio" id="música" name="interesse" value="música" />
+        <label for="music"> Música </label>
+        <br><br>
+        <label for="pesquisa">Pesquisa</label>
+
+        <input  type="search" id="pesquisa">
+        <button id="pesquisar">Pesquisar</button>
+        <br><br>
+        <div id="resultado"></div>
+    </div>
+    <script>
+        const radiomusica = document.getElementById('música');
+        const radiofilme = document.getElementById('Filme');
+
+        document.getElementById('pesquisar').addEventListener('click', function() {
+            const termoPesquisa = document.getElementById('pesquisa').value;
+        
+                if (document.getElementById('Filme').checked) {
+                    // Busca de filme
+                    const apikey = '6d395ee4f63b0b15b407dc0d61e6a787';
+                    const url = `https://api.themoviedb.org/3/search/movie?api_key=${apikey}&query=${termoPesquisa}`;
+
+                    const xhr = new XMLHttpRequest();
+
+                    xhr.addEventListener('readystatechange', function() {
+                        if (this.readyState === this.DONE) {
+                            const response = JSON.parse(this.responseText);
+
+                            if (response.results && response.results.length > 0) {
+                                const filme = response.results[0];
+
+                                const titulo = filme.title;
+                                const descricao = filme.overview;
+                                const dataLancamento = filme.release_date;
+                                const urlPoster = `https://image.tmdb.org/t/p/w500${filme.poster_path}`;
+
+                                const htmlResultado = `
+                                    <h2>${titulo}</h2>
+                                    <img src="${urlPoster}" alt="${titulo}" width="200">
+                                    <p>${descricao}</p>
+                                    <p><strong>Data de lançamento:</strong> ${dataLancamento}</p>`;
+
+                                document.getElementById('resultado').innerHTML = htmlResultado;
+                            } else {
+                                document.getElementById('resultado').innerHTML = "Nenhum filme encontrado.";
+                            }
+                        }
+                    });
+
+                    xhr.open('GET', url);
+                    xhr.send(null);
+
+                } else if (document.getElementById('música').checked) {
+                    // Busca de música
+                    const apiKey = 'ec531f39e0df5df2be1fb518a3a039ef';
+                    const url = `http://ws.audioscrobbler.com/2.0/?method=track.search&track=${termoPesquisa}&api_key=${apiKey}&format=json`;
+
+                    const xhr = new XMLHttpRequest();
+
+                    xhr.addEventListener('readystatechange', function() {
+                        if (this.readyState === this.DONE) {
+                            const response = JSON.parse(this.responseText);
+
+                            if (response.results && response.results.trackmatches && response.results.trackmatches.track.length > 0) {
+                                const faixa = response.results.trackmatches.track[0];
+
+                                const htmlResultado = `
+                                    <h2>${faixa.name}</h2>
+                                    <p><strong>Artista:</strong> ${faixa.artist}</p>
+                                `;
+
+                                document.getElementById('resultado').innerHTML = htmlResultado;
+                            } else {
+                                document.getElementById('resultado').innerHTML = "Nenhuma música encontrada.";
+                            }
+                        }
+                    });
+
+                    xhr.open('GET', url);
+                    xhr.send(null);
+                }
+
+                document.getElementById('pesquisa').value = '';
+
+                document.getElementById('Filme').checked = false;
+                document.getElementById('música').checked = false;
+            });
+
+        
+    </script>
+</body>
+</html>
+
+
